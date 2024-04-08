@@ -1,4 +1,4 @@
-Instruções retiradas do tutorial do urnalzao: https://www.youtube.com/watch?v=eMDWA2ey0zY
+Instruções retiradas do tutorial do urnauzao: https://www.youtube.com/watch?v=eMDWA2ey0zY
 
 - Iniciar o Swarm na Aplicação Docker
 

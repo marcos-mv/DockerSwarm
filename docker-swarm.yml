@@ -21,7 +21,7 @@ services:
     # Define configurações de implantação para o serviço
     deploy:
       # Indica o número de réplicas do serviço
-      replicas: 4
+      replicas: 2
 
       # Especifica os recursos do sistema que o serviço pode usar
       resources:
@@ -57,7 +57,7 @@ services:
     # Mapeia um volume do sistema de arquivos do host para o container
     volumes:
       # Mapeia o arquivo index.html localizado na pasta html do host para o diretório /usr/share/nginx/html dentro do container
-      - ./html/index.html:/usr/share/nginx/html/index.html:ro
+      - ./html/index2.html:/usr/share/nginx/html/index.html:ro
 
     # Define as redes que o serviço vai usar
     networks:
@@ -67,7 +67,7 @@ services:
     # Define configurações de implantação para o serviço
     deploy:
       # Indica o número de réplicas do serviço
-      replicas: 3
+      replicas: 1
 
       # Especifica os recursos do sistema que o serviço pode usar
       resources:

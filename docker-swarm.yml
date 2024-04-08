@@ -1,0 +1,104 @@
+# Define a versão do formato do arquivo Docker Compose
+version: "3.9"
+
+# Define os serviços a serem executados
+services:
+  # Define o serviço chamado "web"
+  web:
+    # Indica a imagem Docker a ser usada para criar este serviço
+    image: nginx:latest
+
+    # Mapeia um volume do sistema de arquivos do host para o container
+    volumes:
+      # Mapeia o arquivo index.html localizado na pasta html do host para o diretório /usr/share/nginx/html dentro do container
+      - ./html/index.html:/usr/share/nginx/html/index.html:ro
+
+    # Define as redes que o serviço vai usar
+    networks:
+      # Usa a rede chamada "global"
+      - global
+
+    # Define configurações de implantação para o serviço
+    deploy:
+      # Indica o número de réplicas do serviço
+      replicas: 4
+
+      # Especifica os recursos do sistema que o serviço pode usar
+      resources:
+        # Define os limites máximos de recursos
+        limits:
+          # Define o número máximo de CPUs que o serviço pode utilizar
+          cpus: "1"
+          # Define o máximo de memória que o serviço pode utilizar
+          memory: 2G
+          # Define o número máximo de processos simultâneos que o serviço pode ter
+          pids: 100
+
+        # Define os recursos mínimos garantidos para o serviço
+        reservations:
+          # Define o mínimo de CPUs garantido para o serviço
+          cpus: "0.1"
+          # Define o mínimo de memória garantido para o serviço
+          memory: 20M
+
+      # Define a política de reinicialização do serviço
+      restart_policy:
+        # Indica que o serviço será reiniciado automaticamente somente em caso de falha
+        condition: on-failure
+
+    # Mapeia as portas do host para as portas do container
+    ports:
+      # Redireciona o tráfego na porta 80 do host para a porta 80 do container
+      - "80:80"
+  web2:
+    # Indica a imagem Docker a ser usada para criar este serviço
+    image: nginx:latest
+
+    # Mapeia um volume do sistema de arquivos do host para o container
+    volumes:
+      # Mapeia o arquivo index.html localizado na pasta html do host para o diretório /usr/share/nginx/html dentro do container
+      - ./html/index.html:/usr/share/nginx/html/index.html:ro
+
+    # Define as redes que o serviço vai usar
+    networks:
+      # Usa a rede chamada "global"
+      - global
+
+    # Define configurações de implantação para o serviço
+    deploy:
+      # Indica o número de réplicas do serviço
+      replicas: 3
+
+      # Especifica os recursos do sistema que o serviço pode usar
+      resources:
+        # Define os limites máximos de recursos
+        limits:
+          # Define o número máximo de CPUs que o serviço pode utilizar
+          cpus: "1"
+          # Define o máximo de memória que o serviço pode utilizar
+          memory: 2G
+          # Define o número máximo de processos simultâneos que o serviço pode ter
+          pids: 100
+
+        # Define os recursos mínimos garantidos para o serviço
+        reservations:
+          # Define o mínimo de CPUs garantido para o serviço
+          cpus: "0.1"
+          # Define o mínimo de memória garantido para o serviço
+          memory: 20M
+
+      # Define a política de reinicialização do serviço
+      restart_policy:
+        # Indica que o serviço será reiniciado automaticamente somente em caso de falha
+        condition: on-failure
+
+    # Mapeia as portas do host para as portas do container
+    ports:
+      # Redireciona o tráfego na porta 80 do host para a porta 80 do container
+      - "8080:80"
+# Define as redes disponíveis para os serviços
+networks:
+  # Define uma rede chamada "global"
+  global:
+    # Especifica o driver de rede a ser usado
+    driver: overlay
